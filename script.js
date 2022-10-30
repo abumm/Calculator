@@ -1,3 +1,5 @@
+//global variables
+let btnValue = 0 ;
 
 function add(a,b){
     let sum = a + b;
@@ -42,3 +44,17 @@ function operate(operation,a,b){
             break;
     }
 }
+
+//test btn Fucntions
+const oneBtn = document.getElementById("one");
+const display = document.getElementsByClassName("display");
+
+oneBtn.onclick = function(){
+    btnValue = 1;
+    display.innerHTML = btnValue;
+    display.innerText = "222222222222222222";
+    display.textContent = "33333";
+    console.log(display);
+    console.log(btnValue);
+}
+
