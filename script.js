@@ -3,8 +3,10 @@ let btnValue = 0 ;
 let displayValue = 0;
 let operation = '';
 let operationActive = false;
+let newOperation = false;
 let a = "";
 let b = "";
+let result = "";
 
 function add(a,b){
     let sum = a + b;
@@ -30,17 +32,17 @@ function operate(operation,a,b){
     switch (operation){
         case '+':
             operand = add(a,b);
-            console.log(operand);
+            console.log("=",operand);
             updateDisplay(operand);
             break;
         case '-': 
             operand = subtract(a,b);
-            console.log(operand);
+            console.log("=",operand);
             updateDisplay(operand);
             break;
         case 'x':
             operand = multiply(a,b);
-            console.log(operand);
+            console.log("=",operand);
             updateDisplay(operand);
             break;
         case "/" :
@@ -53,7 +55,7 @@ function operate(operation,a,b){
             else {
                 operand = divide(a,b);
                 console.log("this is happening")
-                console.log(operand);
+                console.log("=",operand);
                 updateDisplay(operand);
             }
 
@@ -92,10 +94,13 @@ clearBtn.addEventListener("click", function(){
 
 //CALCULATE 
 calculateBtn.addEventListener("click", function(){
+    newOperation = true;
     b = parseInt(b);
     console.log("math to do",a,operation,b);    
     console.log("a", typeof a, "b", typeof b)
     operate(operation,a,b);
+    result = calcDisplay.innerHTML; 
+    b = "";
     
 });
 
@@ -105,9 +110,11 @@ function clearDisplay(){
     displayValue = 0;
     a = "";
     b = "";
+    result = "";
     operationActive = false;
+    newOperation = false;
     calcDisplay.innerHTML = displayValue;
-    console.log(a,b);
+    //console.log(a,b,result);
 }
 
 function updateDisplay(val){
@@ -115,16 +122,24 @@ function updateDisplay(val){
 }
 
 function numberFunction(button){
+    console.log("initial b is ", b );
     btnValue = button.innerHTML;
+    console.log("btnValue is ", btnValue)
     let temp = 0; 
     if(operationActive == false){
         a += btnValue;
         console.log("a",a);
+        console.log("if b is ", b );
         temp = a; 
+    }
+    else if (newOperation == true){
+        a = parseInt(result);
+        b += btnValue;
+        console.log("else if b is ", b );
     }
     else{
         b+= btnValue;
-        console.log("b",b);
+        console.log("else b",b);
         temp = b
     }
     updateDisplay(temp);
